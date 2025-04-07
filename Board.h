@@ -4,14 +4,14 @@
 
 using namespace std;
 
-class Board {
-private:
+struct Board {
+
 	vector<vector<Tile>> grid;
 
 	bool canMerge(int row, int col, int newRow, int newCol) const;
 	bool slideTile(int row, int col, int newRow, int newCol);
 	void mergeTiles(int row, int col, int newRow, int newCol);
-public:
+
 	Board();
 
 	void initialize();

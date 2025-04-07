@@ -1,10 +1,10 @@
 #pragma once
 #include <SDL.h>
 
-class Tile {
-private:
+struct Tile {
+
 	int value;
-public: 
+
 	Tile(int value = 0);
 
 	int getValue() const;
