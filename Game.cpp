@@ -65,5 +65,89 @@ void Game::handleEvents() {
 		if (event.type == SDL_QUIT) {
 			running = false;
 		}
+		else if (event.type == SDL_KEYDOWN) {
+			switch (event.key.keysym.sym) {
+			case SDLK_UP:
+				if (!gameOver && !youWin) {
+					if (board.moveTilesUp()) {
+						board.addRandomTile();
+						// sound
+					}
+				}
+				break;
+			case SDLK_DOWN:
+				if (!gameOver && !youWin) {
+					if (board.moveTilesDown()) {
+						board.addRandomTile();
+						// sound
+					}
+				}
+				break;
+			case SDLK_LEFT:
+				if (!gameOver && !youWin) {
+					if (board.moveTilesLeft()) {
+						board.addRandomTile();
+						// sound
+					}
+				}
+				break;
+			case SDLK_RIGHT:
+				if (!gameOver && !youWin) {
+					if (board.moveTilesRight()) {
+						board.addRandomTile();
+						// sound
+					}
+				}
+				break;
+			case SDLK_F5:
+				restart();
+				break;
+			case SDLK_ESCAPE:
+				running = false;
+				break;
+			}
+		}
 	}
+}
+
+void Game::update() {
+	if (!board.hasMoves()) {
+		gameOver = true;
+		//sound
+	}
+	else if (board.hasWon() && !youWin) {
+		youWin = true;
+		//sound
+	}
+}
+
+void Game::render() {
+	renderer.render(board);
+	
+	if (gameOver)
+		renderer.renderGameOver();
+	else if (youWin)
+		renderer.renderYouWin();
+	renderer.renderScore(score);
+}
+
+void Game::restart() {
+	board.initialize();
+	gameOver = false;
+	youWin = false;
+	score = 0;
+	board.addRandomTile();
+	board.addRandomTile();
+}
+
+void MergeSound() {
+	//
+}
+
+void WinSound() {
+	//
+}
+
+void LoseSound() {
+	//
 }
