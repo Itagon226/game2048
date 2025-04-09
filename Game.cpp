@@ -69,7 +69,7 @@ void Game::handleEvents() {
 			switch (event.key.keysym.sym) {
 			case SDLK_UP:
 				if (!gameOver && !youWin) {
-					if (board.moveTilesUp()) {
+					if (board.moveUp()) {
 						board.addRandomTile();
 						// sound
 					}
@@ -77,7 +77,7 @@ void Game::handleEvents() {
 				break;
 			case SDLK_DOWN:
 				if (!gameOver && !youWin) {
-					if (board.moveTilesDown()) {
+					if (board.moveDown()) {
 						board.addRandomTile();
 						// sound
 					}
@@ -85,7 +85,7 @@ void Game::handleEvents() {
 				break;
 			case SDLK_LEFT:
 				if (!gameOver && !youWin) {
-					if (board.moveTilesLeft()) {
+					if (board.moveLeft()) {
 						board.addRandomTile();
 						// sound
 					}
@@ -93,7 +93,7 @@ void Game::handleEvents() {
 				break;
 			case SDLK_RIGHT:
 				if (!gameOver && !youWin) {
-					if (board.moveTilesRight()) {
+					if (board.moveRight()) {
 						board.addRandomTile();
 						// sound
 					}

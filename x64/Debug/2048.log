@@ -1,2 +1,10 @@
-﻿  2048.cpp
-  2048.vcxproj -> C:\Users\admin\source\repos\2048GAME\2048\x64\Debug\2048.exe
+﻿  Board.cpp
+C:\Users\admin\source\repos\2048GAME\2048\2048\Board.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\admin\source\repos\2048GAME\2048\2048\Board.cpp(79,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Game.cpp
+C:\Users\admin\source\repos\2048GAME\2048\2048\Game.cpp(50,3): error C3867: 'Game::handleEvents': non-standard syntax; use '&' to create a pointer to member
+  Generating Code...
+C:\Users\admin\source\repos\2048GAME\2048\2048\Board.cpp(27,1): error C4716: 'Board::moveDown': must return a value
+C:\Users\admin\source\repos\2048GAME\2048\2048\Board.cpp(108,1): error C4716: 'Board::hasMoves': must return a value
+C:\Users\admin\source\repos\2048GAME\2048\2048\Board.cpp(23,1): error C4716: 'Board::moveUp': must return a value
+C:\Users\admin\source\repos\2048GAME\2048\2048\Board.cpp(112,1): error C4716: 'Board::hasWon': must return a value

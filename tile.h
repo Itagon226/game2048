@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <SDL.h>
 
 struct Tile {
@@ -12,7 +12,7 @@ struct Tile {
 
 	bool isEmpty() const;
 
-	// M�u s?c d?a tr�n gi� tr? �
+	// Màu sắc dựa trên giá trị của ô
 	SDL_Color getColor() const;
 	SDL_Color getTextColor() const;
 };
