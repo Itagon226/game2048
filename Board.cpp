@@ -20,10 +20,27 @@ void Board::initialize() {
 
 bool Board::moveUp() {
 	
+	bool moved = false;
+
+	for (int col = 0; col < GRID_SIZE; col++) {
+
+		vector<Tile> newCol;
+
+		for (int row = 0; row < GRID_SIZE; row++) {
+			if (!grid[row][col].isEmpty()) {
+				newCol.push_back(grid[row][col]);
+			}
+		}
+
+		for (int i = 0; i < )
+	}
 }
 
 bool Board::moveDown() {
 
+	bool moved = false;
+
+	
 }
 
 bool Board::moveLeft() {
