@@ -160,7 +160,30 @@ bool Board::moveRight() {
 }
 
 void Board::addRandomTile() {
+	vector<pair<int, int>> emptyCell;
 
+	for (int row = 0; row < GRID_SIZE; row++) {
+		for (int col = 0; col < GRID_SIZE; col++) {
+			if (grid[row][col].isEmpty()) {
+				pair<int, int> cell;
+				emptyCell.push_back(make_pair(row, col));
+			}
+		}
+	}
+
+	if (!emptyCell.empty()) {
+		int randomCell = rand() % emptyCell.size();
+		int randomRow = emptyCell[randomCell].first;
+		int randomCol = emptyCell[randomCell].second;
+
+		int value;
+		int randomNum = rand() % 10;
+		if (randomNum == 0) {
+			value = 4;
+		}
+		else value = 2;
+		grid[randomRow][randomCol].setValue(value);
+	}
 }
 
 bool Board::hasMoves() const {
