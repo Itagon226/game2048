@@ -19,11 +19,9 @@ void Board::initialize() {
 }
 
 bool Board::moveUp() {
-	
 	bool moved = false;
 
 	for (int col = 0; col < GRID_SIZE; col++) {
-
 		vector<Tile> newCol;
 
 		for (int row = 0; row < GRID_SIZE; row++) {
@@ -32,23 +30,68 @@ bool Board::moveUp() {
 			}
 		}
 
-		for (int i = 0; i < )
+		for (int i = 0; i < newCol.size(); i++) {
+			if (i + 1 < newCol.size() && newCol[i].getValue() == newCol[i + 1].getValue()) {
+				newCol[i].setValue(newCol[i].getValue() * 2);
+				newCol.erase(newCol.begin() + i + 1);
+			}
+		}
+		
+		while (newCol.size() < GRID_SIZE) {
+			newCol.push_back(Tile(0));
+		}
+
+		for (int row = 0; row < GRID_SIZE; row++) {
+			if (grid[row][col].getValue() != newCol[row].getValue()) {
+				moved = true;
+			}
+			grid[row][col] = newCol[row];
+		}
 	}
+
+	return moved;
 }
 
 bool Board::moveDown() {
-
 	bool moved = false;
-
 	
+	for (int col = 0; col < GRID_SIZE; col++) {
+		vector<Tile> newCol;
+
+		for (int row = GRID_SIZE - 1; row >= 0; row--) {
+			if (!grid[row][col].isEmpty()) {
+				newCol.insert(newCol.begin(), grid[row][col]);
+			}
+		}
+
+		reverse(newCol.begin(), newCol.end());
+		for (int i = 0; i < newCol.size() - 1; i++) {
+			if (newCol[i].getValue() == newCol[i + 1].getValue()) {
+				newCol[i].setValue(newCol[i].getValue() * 2);
+				newCol.erase(newCol.begin() + i + 1);
+			}
+		}
+		reverse(newCol.begin(), newCol.end());
+
+		while (newCol.size() < GRID_SIZE) {
+			newCol.insert(newCol.begin(), Tile(0));
+		}
+
+		for (int row = 0; row < GRID_SIZE; row++) {
+			int index = GRID_SIZE - row - 1;
+			if (grid[index][col].getValue() != newCol[row].getValue()) {
+				moved = true;
+			}
+			grid[index][col] = newCol[row];
+		}
+	}
+	return moved;
 }
 
 bool Board::moveLeft() {
-
 	bool moved = false;
 
 	for (int row = 0; row < GRID_SIZE; row++) {
-
 		vector<Tile> newRow;
 
 		for (int col = 0; col < GRID_SIZE; col++) {
@@ -80,11 +123,9 @@ bool Board::moveLeft() {
 }
 
 bool Board::moveRight() {
-
 	bool moved = false;
 
 	for (int row = 0; row < GRID_SIZE; row++) {
-
 		vector<Tile> newRow;
 
 		for (int col = GRID_SIZE-1; col >= 0 ; col--) {
@@ -93,12 +134,14 @@ bool Board::moveRight() {
 			}
 		}
 
-		for (int i = newRow.size() - 1; i > 0; i--) {
-			if (newRow[i].getValue() == newRow[i - 1].getValue()) {
+		reverse(newRow.begin(), newRow.end());
+		for (int i = 0; i < newRow.size() - 1; i++) {
+			if (newRow[i].getValue() == newRow[i + 1].getValue()) {
 				newRow[i].setValue(newRow[i].getValue() * 2);
-				newRow.erase(newRow.begin() + i - 1);
+				newRow.erase(newRow.begin() + i + 1);
 			}
 		}
+		reverse(newRow.begin(), newRow.end());
 
 		while (newRow.size() < GRID_SIZE) {
 			newRow.insert(newRow.begin(), Tile(0));
