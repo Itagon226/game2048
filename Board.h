@@ -17,8 +17,8 @@ struct Board {
 	bool moveRight();
 
 	void addRandomTile();
-	bool hasWon() const;
-	bool hasMoves() const;
+	bool Win() const;
+	bool canMove() const;
 
 	bool canMerge(int row, int col, int newRow, int newCol) const;
 	bool slideTile(int row, int col, int newRow, int newCol);

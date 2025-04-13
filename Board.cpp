@@ -186,10 +186,32 @@ void Board::addRandomTile() {
 	}
 }
 
-bool Board::hasMoves() const {
+bool Board::canMove() const {
+	
+	for (int row = 0; row < GRID_SIZE; row++) {
+		for (int col = 0; col < GRID_SIZE; col++) {
+			if (grid[row][col].isEmpty())
+				return true;
 
+			if (row < GRID_SIZE - 1 && grid[row][col].getValue() == grid[row + 1][col].getValue())
+				return true;
+
+			if (col < GRID_SIZE - 1 && grid[row][col].getValue() == grid[row][col + 1].getValue())
+				return true;
+		}
+	}
+
+	return false;
 }
 
-bool Board::hasWon() const {
+bool Board::Win() const {
 
+	for (int row = 0; row < GRID_SIZE; row++) {
+		for (int col = 0; col < GRID_SIZE; col++) {
+			if (grid[row][col].getValue() == 2048)
+				return true;
+		}
+	}
+
+	return false;
 }
