@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-
+const char* WINDOW_TITLE = "2048 GAME";
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 640;
 const int GRID_SIZE = 4;     

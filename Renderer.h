@@ -9,8 +9,6 @@ struct Renderer {
 	SDL_Renderer* renderer;
 	TTF_Font* font;
 
-	void renderTile(int x, int y, const Tile& tile);
-
 	Renderer();
 	~Renderer();
 
@@ -19,4 +17,7 @@ struct Renderer {
 	void renderGameOver();
 	void renderYouWin();
 	void renderScore(int score);
+
+	void renderTile(int x, int y, const Tile& tile);
+
 };

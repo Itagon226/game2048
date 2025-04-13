@@ -47,7 +47,7 @@ void Game::run() {
 	while (running) {
 		frameStart = SDL_GetTicks();
 
-		handleEvents;
+		handleEvents();
 		update();
 		render();
 
@@ -111,11 +111,11 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-	if (!board.hasMoves()) {
+	if (!board.canMove()) {
 		gameOver = true;
 		//sound
 	}
-	else if (board.hasWon() && !youWin) {
+	else if (board.Win() && !youWin) {
 		youWin = true;
 		//sound
 	}

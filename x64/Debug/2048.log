@@ -1,15 +1,11 @@
-﻿  2048.cpp
-  Board.cpp
-C:\Users\admin\source\repos\2048GAME\2048\2048\Board.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Game.cpp
-C:\Users\admin\source\repos\2048GAME\2048\2048\Game.cpp(50,3): error C3867: 'Game::handleEvents': non-standard syntax; use '&' to create a pointer to member
-C:\Users\admin\source\repos\2048GAME\2048\2048\Game.cpp(114,13): error C2039: 'hasMoves': is not a member of 'Board'
-      C:\Users\admin\source\repos\2048GAME\2048\2048\Board.h(7,8):
-      see declaration of 'Board'
-  
-C:\Users\admin\source\repos\2048GAME\2048\2048\Game.cpp(118,17): error C2039: 'hasWon': is not a member of 'Board'
-      C:\Users\admin\source\repos\2048GAME\2048\2048\Board.h(7,8):
-      see declaration of 'Board'
-  
+﻿  Game.cpp
   Tile.cpp
   Generating Code...
+Game.obj : error LNK2019: unresolved external symbol "public: __cdecl Renderer::Renderer(void)" (??0Renderer@@QEAA@XZ) referenced in function "public: __cdecl Game::Game(void)" (??0Game@@QEAA@XZ)
+Game.obj : error LNK2019: unresolved external symbol "public: __cdecl Renderer::~Renderer(void)" (??1Renderer@@QEAA@XZ) referenced in function "public: __cdecl Game::~Game(void)" (??1Game@@QEAA@XZ)
+Game.obj : error LNK2019: unresolved external symbol "public: bool __cdecl Renderer::initialize(void)" (?initialize@Renderer@@QEAA_NXZ) referenced in function "public: bool __cdecl Game::initialize(void)" (?initialize@Game@@QEAA_NXZ)
+Game.obj : error LNK2019: unresolved external symbol "public: void __cdecl Renderer::render(struct Board const &)" (?render@Renderer@@QEAAXAEBUBoard@@@Z) referenced in function "public: void __cdecl Game::render(void)" (?render@Game@@QEAAXXZ)
+Game.obj : error LNK2019: unresolved external symbol "public: void __cdecl Renderer::renderGameOver(void)" (?renderGameOver@Renderer@@QEAAXXZ) referenced in function "public: void __cdecl Game::render(void)" (?render@Game@@QEAAXXZ)
+Game.obj : error LNK2019: unresolved external symbol "public: void __cdecl Renderer::renderYouWin(void)" (?renderYouWin@Renderer@@QEAAXXZ) referenced in function "public: void __cdecl Game::render(void)" (?render@Game@@QEAAXXZ)
+Game.obj : error LNK2019: unresolved external symbol "public: void __cdecl Renderer::renderScore(int)" (?renderScore@Renderer@@QEAAXH@Z) referenced in function "public: void __cdecl Game::render(void)" (?render@Game@@QEAAXXZ)
+C:\Users\admin\source\repos\2048GAME\2048\x64\Debug\2048.exe : fatal error LNK1120: 7 unresolved externals
