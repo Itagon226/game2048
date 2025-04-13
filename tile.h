@@ -7,8 +7,8 @@ struct Tile {
 
 	Tile(int value = 0);
 
-	int getValue() const;
 	void setValue(int value);
+	int getValue() const;
 
 	bool isEmpty() const;
 
