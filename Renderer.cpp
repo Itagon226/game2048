@@ -3,6 +3,8 @@
 #include <SDL_ttf.h>
 #include <string>
 
+using namespace std;
+
 Renderer::Renderer() : window(nullptr), renderer(nullptr), font(nullptr) {}
 
 Renderer::~Renderer() {
@@ -23,4 +25,50 @@ bool Renderer::initialize() {
 
 	SDL_SetRenderDrawColor(renderer, 250, 248, 239, 255);
 	return true;
+}
+
+void Renderer::render(const Board& board) {
+	SDL_RenderClear(renderer);
+
+	// draw board
+	SDL_SetRenderDrawColor(renderer, 187, 173, 160, 255);
+	SDL_RenderFillRect(renderer, nullptr); 
+
+	// draw tile
+	for (int row = 0; row < GRID_SIZE; row++) {
+		for (int col = 0; col < GRID_SIZE; col++) {
+			renderTile(col * (TILE_SIZE + TILE_MARGIN) + BOARD_PADDING,
+				row * (TILE_SIZE + TILE_MARGIN) + BOARD_PADDING,
+				board.getTile(row,col));
+		}
+	}
+
+	SDL_RenderPresent(renderer);
+}
+
+void Renderer::renderTile(int x, int y, const Tile& tile) {
+
+	SDL_Color color = tile.getColor();
+	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+
+	SDL_Rect tileRect = { x,y,TILE_SIZE, TILE_SIZE };
+	SDL_RenderFillRect(renderer, &tileRect);
+
+	if (!tile.isEmpty()) {
+		SDL_Color textColor = tile.getTextColor();
+		string valueStr = to_string(tile.getValue());
+
+		SDL_Surface* surface = TTF_RenderText_Solid(font, valueStr.c_str(), textColor);
+		SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+		SDL_Rect textRect = {
+			x + (TILE_SIZE - surface->w) / 2,
+			y + (TILE_SIZE - surface->h) / 2,
+			surface->w,
+			surface->h
+		};
+		SDL_RenderCopy(renderer, texture, nullptr, &textRect);
+		SDL_FreeSurface(surface);
+		SDL_DestroyTexture(texture);
+	}
 }
