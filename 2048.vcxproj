@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClCompile Include="2048.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Constants.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Tile.cpp" />

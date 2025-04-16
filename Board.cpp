@@ -214,3 +214,34 @@ bool Board::Win() const {
 
 	return false;
 }
+
+bool Board::canMerge(int row, int col, int newRow, int newCol) const {
+
+	if (newRow < 0 || newRow >= GRID_SIZE || newCol < 0 || newCol >= GRID_SIZE) {
+		return false;
+	}
+
+	return (grid[newRow][newCol].isEmpty() || grid[newRow][newCol].getValue() == grid[row][col].getValue());
+}
+
+bool Board::slideTile(int row, int col, int newRow, int newCol) {
+
+	if (!canMerge(row, col, newRow, newCol)) {
+		return false;
+	}
+
+	if (grid[newRow][newCol].isEmpty()) {
+		grid[newRow][newCol] = grid[row][col];
+		grid[row][col] = Tile(0);
+		return true;
+	}
+
+	return false;
+}
+
+void Board::mergeTiles(int row, int col, int newRow, int newCol) {
+	if (grid[newRow][newCol].getValue() == grid[row][col].getValue()) {
+		grid[newRow][newCol].setValue(grid[row][col].getValue() * 2);
+		grid[row][col] = Tile(0);
+	}
+}

@@ -1,1 +1,6 @@
 C:\Users\admin\source\repos\2048GAME\2048\2048\2048.cpp;C:\Users\admin\source\repos\2048GAME\2048\2048\x64\Debug\2048.obj
+C:\Users\admin\source\repos\2048GAME\2048\2048\Board.cpp;C:\Users\admin\source\repos\2048GAME\2048\2048\x64\Debug\Board.obj
+C:\Users\admin\source\repos\2048GAME\2048\2048\Constants.cpp;C:\Users\admin\source\repos\2048GAME\2048\2048\x64\Debug\Constants.obj
+C:\Users\admin\source\repos\2048GAME\2048\2048\Game.cpp;C:\Users\admin\source\repos\2048GAME\2048\2048\x64\Debug\Game.obj
+C:\Users\admin\source\repos\2048GAME\2048\2048\Renderer.cpp;C:\Users\admin\source\repos\2048GAME\2048\2048\x64\Debug\Renderer.obj
+C:\Users\admin\source\repos\2048GAME\2048\2048\Tile.cpp;C:\Users\admin\source\repos\2048GAME\2048\2048\x64\Debug\Tile.obj
