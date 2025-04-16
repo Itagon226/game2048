@@ -125,9 +125,9 @@ void Game::render() {
 	renderer.render(board);
 	
 	if (gameOver)
-		renderer.renderGameOver();
+		renderer.renderLose();
 	else if (youWin)
-		renderer.renderYouWin();
+		renderer.renderWin();
 	renderer.renderScore(score);
 }
 

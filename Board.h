@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "Tile.h"
+#include "Constants.h"
 
 
 
@@ -20,11 +21,12 @@ struct Board {
 	bool Win() const;
 	bool canMove() const;
 
-	bool canMerge(int row, int col, int newRow, int newCol) const;
+	/*bool canMerge(int row, int col, int newRow, int newCol) const;
 	bool slideTile(int row, int col, int newRow, int newCol);
 	void mergeTiles(int row, int col, int newRow, int newCol);
-	
-	bool isFull() const;
-
-	const Tile& getTile(int row, int col) const;
+	*/
+	/*bool isFull() const;*/
+	const Tile& getTile(int row, int col) const {
+		return false;
+	}
 };

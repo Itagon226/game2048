@@ -1,6 +1,4 @@
 #include "Renderer.h"
-#include "Constants.h"
-#include <SDL_ttf.h>
 #include <string>
 
 using namespace std;
@@ -8,9 +6,9 @@ using namespace std;
 Renderer::Renderer() : window(nullptr), renderer(nullptr), font(nullptr) {}
 
 Renderer::~Renderer() {
-	if (font) TTF_CloseFont;
-	if (renderer) SDL_DestroyRenderer;
-	if (window) SDL_DestroyWindow;
+	if (font != nullptr) TTF_CloseFont(font);
+	if (renderer != nullptr) SDL_DestroyRenderer(renderer);
+	if (window != nullptr) SDL_DestroyWindow(window);
 }
 
 bool Renderer::initialize() {
@@ -119,4 +117,16 @@ void Renderer::renderWin() {
 	SDL_DestroyTexture(texture);
 }
 
+void Renderer::renderScore(int score) {
+	string scoreText = "Score: " + to_string(score);
+	SDL_Color color = { 255,255,255,255 };
 
+	SDL_Surface* surface = TTF_RenderText_Solid(font, scoreText.c_str(), color);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_Rect textRect = { 20,20,surface->w, surface->h };
+
+	SDL_RenderCopy(renderer, texture, nullptr, &textRect);
+
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(texture);
+}

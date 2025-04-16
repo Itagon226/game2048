@@ -25,8 +25,8 @@ struct Game {
 	void update();
 	void render();
 
-	void MergeSound();
+	/*void MergeSound();
 	void WinSound();
-	void LoseSound();
+	void LoseSound();*/
 
 };

@@ -1,12 +1,11 @@
 #include "Board.h"
-#include "Constants.h"
 #include <cstdlib>
 #include <ctime>
 
 using namespace std;
 
 Board::Board() {
-	srand(time(0));
+	srand(static_cast<unsigned int>(time(0)));
 	grid.resize(GRID_SIZE, vector<Tile>(GRID_SIZE));
 }
 
