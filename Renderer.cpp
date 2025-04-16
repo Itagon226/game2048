@@ -67,8 +67,56 @@ void Renderer::renderTile(int x, int y, const Tile& tile) {
 			surface->w,
 			surface->h
 		};
+
 		SDL_RenderCopy(renderer, texture, nullptr, &textRect);
 		SDL_FreeSurface(surface);
 		SDL_DestroyTexture(texture);
 	}
 }
+
+void Renderer::renderLose() {
+	SDL_Color color = { 255,0,0,200 };
+	SDL_Color textColor = { 255,255,255,255 };
+	SDL_SetRenderDrawColor(renderer, color.r, color.b, color.g, color.a);
+
+	SDL_Rect background = { 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
+	SDL_RenderFillRect(renderer, &background);
+
+	SDL_Surface* surface = TTF_RenderText_Solid(font, "GAME OVER!", textColor);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+	SDL_Rect textRect = {
+		(SCREEN_WIDTH - surface->w) / 2,
+		(SCREEN_HEIGHT - surface->h) / 2,
+		surface->w,
+		surface->h
+	};
+	SDL_RenderCopy(renderer, texture, nullptr, &textRect);
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(texture);
+}
+
+void Renderer::renderWin() {
+	SDL_Color color = { 144, 238, 144, 180 };
+	SDL_Color textColor = { 0, 100, 0, 255 };
+
+	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+	SDL_Rect background = { 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
+	SDL_RenderFillRect(renderer, &background);
+
+	SDL_Surface* surface = TTF_RenderText_Solid(font, "YOU WIN!", textColor);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+	SDL_Rect textRect = {
+		(SCREEN_WIDTH - surface->w) / 2,
+		(SCREEN_HEIGHT - surface->h) / 2,
+		surface->w,
+		surface->h,
+	};
+	SDL_RenderCopy(renderer, texture, nullptr, &textRect);
+
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(texture);
+}
+
+

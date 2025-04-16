@@ -14,8 +14,8 @@ struct Renderer {
 
 	bool initialize();
 	void render(const Board& board);
-	void renderGameOver();
-	void renderYouWin();
+	void renderLose();
+	void renderWin();
 	void renderScore(int score);
 
 	void renderTile(int x, int y, const Tile& tile);
