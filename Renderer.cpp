@@ -36,7 +36,7 @@ void Renderer::render(const Board& board) {
 	for (int row = 0; row < GRID_SIZE; row++) {
 		for (int col = 0; col < GRID_SIZE; col++) {
 			renderTile(col * (TILE_SIZE + TILE_MARGIN) + BOARD_PADDING,
-				row * (TILE_SIZE + TILE_MARGIN) + BOARD_PADDING,
+				row * (TILE_SIZE + TILE_MARGIN) + BOARD_PADDING ,
 				board.getTile(row,col));
 		}
 	}
@@ -75,7 +75,7 @@ void Renderer::renderTile(int x, int y, const Tile& tile) {
 void Renderer::renderLose() {
 	SDL_Color color = { 255,0,0,200 };
 	SDL_Color textColor = { 255,255,255,255 };
-	SDL_SetRenderDrawColor(renderer, color.r, color.b, color.g, color.a);
+	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 
 	SDL_Rect background = { 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
 	SDL_RenderFillRect(renderer, &background);

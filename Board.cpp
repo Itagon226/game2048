@@ -1,6 +1,7 @@
-#include "Board.h"
+﻿#include "Board.h"
 #include <cstdlib>
 #include <ctime>
+#include <stdexcept>
 
 using namespace std;
 
@@ -17,34 +18,44 @@ void Board::initialize() {
 	}
 }
 
+
+vector<Tile> Board::mergeTile(const vector<Tile>& tiles) {
+	vector<Tile> merged;
+	int i = 0;
+	while (i < tiles.size()) {
+		if (i + 1 < tiles.size() && tiles[i].getValue() == tiles[i + 1].getValue()) {
+			merged.push_back(Tile(tiles[i].getValue() * 2));
+			i += 2;
+		}
+		else {
+			merged.push_back(tiles[i]);
+			i++;
+		}
+	}
+	while (merged.size() < GRID_SIZE) {
+		merged.push_back(Tile(0));
+	}
+	return merged;
+}
+
 bool Board::moveUp() {
 	bool moved = false;
 
 	for (int col = 0; col < GRID_SIZE; col++) {
-		vector<Tile> newCol;
-
+		vector<Tile> column;
 		for (int row = 0; row < GRID_SIZE; row++) {
 			if (!grid[row][col].isEmpty()) {
-				newCol.push_back(grid[row][col]);
+				column.push_back(grid[row][col]);
 			}
 		}
 
-		for (int i = 0; i < newCol.size(); i++) {
-			if (i + 1 < newCol.size() && newCol[i].getValue() == newCol[i + 1].getValue()) {
-				newCol[i].setValue(newCol[i].getValue() * 2);
-				newCol.erase(newCol.begin() + i + 1);
-			}
-		}
-		
-		while (newCol.size() < GRID_SIZE) {
-			newCol.push_back(Tile(0));
-		}
+		vector<Tile> merged = mergeTile(column);
 
 		for (int row = 0; row < GRID_SIZE; row++) {
-			if (grid[row][col].getValue() != newCol[row].getValue()) {
+			if (grid[row][col].getValue() != merged[row].getValue()) {
 				moved = true;
 			}
-			grid[row][col] = newCol[row];
+			grid[row][col] = merged[row];
 		}
 	}
 
@@ -53,37 +64,26 @@ bool Board::moveUp() {
 
 bool Board::moveDown() {
 	bool moved = false;
-	
-	for (int col = 0; col < GRID_SIZE; col++) {
-		vector<Tile> newCol;
 
+	for (int col = 0; col < GRID_SIZE; col++) {
+		vector<Tile> column;
 		for (int row = GRID_SIZE - 1; row >= 0; row--) {
 			if (!grid[row][col].isEmpty()) {
-				newCol.insert(newCol.begin(), grid[row][col]);
+				column.push_back(grid[row][col]);
 			}
 		}
 
-		reverse(newCol.begin(), newCol.end());
-		for (int i = 0; i < newCol.size() - 1; i++) {
-			if (newCol[i].getValue() == newCol[i + 1].getValue()) {
-				newCol[i].setValue(newCol[i].getValue() * 2);
-				newCol.erase(newCol.begin() + i + 1);
-			}
-		}
-		reverse(newCol.begin(), newCol.end());
-
-		while (newCol.size() < GRID_SIZE) {
-			newCol.insert(newCol.begin(), Tile(0));
-		}
+		vector<Tile> merged = mergeTile(column);
 
 		for (int row = 0; row < GRID_SIZE; row++) {
-			int index = GRID_SIZE - row - 1;
-			if (grid[index][col].getValue() != newCol[row].getValue()) {
+			int index = GRID_SIZE - 1 - row;
+			if (grid[index][col].getValue() != merged[row].getValue()) {
 				moved = true;
 			}
-			grid[index][col] = newCol[row];
+			grid[index][col] = merged[row];
 		}
 	}
+
 	return moved;
 }
 
@@ -91,30 +91,20 @@ bool Board::moveLeft() {
 	bool moved = false;
 
 	for (int row = 0; row < GRID_SIZE; row++) {
-		vector<Tile> newRow;
-
+		vector<Tile> line;
 		for (int col = 0; col < GRID_SIZE; col++) {
 			if (!grid[row][col].isEmpty()) {
-				newRow.push_back(grid[row][col]);
+				line.push_back(grid[row][col]);
 			}
 		}
 
-		for (int i = 0; i < newRow.size(); i++) {
-			if (i + 1 < newRow.size() && newRow[i].getValue() == newRow[i + 1].getValue()) {
-				newRow[i].setValue(newRow[i].getValue() * 2);
-				newRow.erase(newRow.begin() + i + 1);
-			}
-		}
-
-		while (newRow.size() < GRID_SIZE) {
-			newRow.push_back(Tile(0));
-		}
+		vector<Tile> merged = mergeTile(line);
 
 		for (int col = 0; col < GRID_SIZE; col++) {
-			if (grid[row][col].getValue() != newRow[col].getValue()) {
+			if (grid[row][col].getValue() != merged[col].getValue()) {
 				moved = true;
 			}
-			grid[row][col] = newRow[col];
+			grid[row][col] = merged[col];
 		}
 	}
 
@@ -125,38 +115,27 @@ bool Board::moveRight() {
 	bool moved = false;
 
 	for (int row = 0; row < GRID_SIZE; row++) {
-		vector<Tile> newRow;
-
-		for (int col = GRID_SIZE-1; col >= 0 ; col--) {
+		vector<Tile> line;
+		for (int col = GRID_SIZE - 1; col >= 0; col--) {
 			if (!grid[row][col].isEmpty()) {
-				newRow.insert(newRow.begin(), grid[row][col]);
+				line.push_back(grid[row][col]);
 			}
 		}
 
-		reverse(newRow.begin(), newRow.end());
-		for (int i = 0; i < newRow.size() - 1; i++) {
-			if (newRow[i].getValue() == newRow[i + 1].getValue()) {
-				newRow[i].setValue(newRow[i].getValue() * 2);
-				newRow.erase(newRow.begin() + i + 1);
-			}
-		}
-		reverse(newRow.begin(), newRow.end());
-
-		while (newRow.size() < GRID_SIZE) {
-			newRow.insert(newRow.begin(), Tile(0));
-		}
+		vector<Tile> merged = mergeTile(line);
 
 		for (int col = 0; col < GRID_SIZE; col++) {
-			int index = GRID_SIZE - col - 1;
-			if (newRow[col].getValue() != grid[row][index].getValue()) {
+			int index = GRID_SIZE - 1 - col;
+			if (grid[row][index].getValue() != merged[col].getValue()) {
 				moved = true;
 			}
-			grid[row][index] = newRow[col];
+			grid[row][index] = merged[col];
 		}
 	}
 
 	return moved;
 }
+
 
 void Board::addRandomTile() {
 	vector<pair<int, int>> emptyCell;
@@ -164,7 +143,6 @@ void Board::addRandomTile() {
 	for (int row = 0; row < GRID_SIZE; row++) {
 		for (int col = 0; col < GRID_SIZE; col++) {
 			if (grid[row][col].isEmpty()) {
-				pair<int, int> cell;
 				emptyCell.push_back(make_pair(row, col));
 			}
 		}
@@ -244,4 +222,24 @@ void Board::mergeTiles(int row, int col, int newRow, int newCol) {
 		grid[newRow][newCol].setValue(grid[row][col].getValue() * 2);
 		grid[row][col] = Tile(0);
 	}
+}
+
+bool Board::isFull() const {
+	for (int row = 0; row < GRID_SIZE; row++) {
+		for (int col = 0; col < GRID_SIZE; col++) {
+			if (grid[row][col].isEmpty())
+				return false;
+		}
+	}
+	return true;
+}
+
+
+#include <stdexcept>
+
+const Tile& Board::getTile(int row, int col) const {
+	if (row >= 0 && row < GRID_SIZE && col >= 0 && col < GRID_SIZE) {
+		return grid[row][col];
+	}
+	throw std::out_of_range("Invalid tile position");
 }

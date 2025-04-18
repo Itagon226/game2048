@@ -12,6 +12,7 @@ struct Board {
 	Board();
 	void initialize();
 
+	std::vector<Tile> mergeTile(const std::vector<Tile>& tiles);
 	bool moveUp();
 	bool moveDown();
 	bool moveLeft();
@@ -26,6 +27,6 @@ struct Board {
 	void mergeTiles(int row, int col, int newRow, int newCol);
 	
 	bool isFull() const;
-	const Tile& getTile(int row, int col) const {
-	}
+	const Tile& getTile(int row, int col) const ;
+	
 };
