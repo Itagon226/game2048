@@ -1,7 +1,2 @@
-﻿  2048.cpp
-  Board.cpp
-  Constants.cpp
-  Game.cpp
-  Renderer.cpp
-  Generating Code...
+﻿  Renderer.cpp
   2048.vcxproj -> C:\Users\admin\source\repos\2048GAME\2048\x64\Debug\2048.exe

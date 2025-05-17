@@ -67,48 +67,35 @@ void Game::handleEvents() {
 		}
 		else if (event.type == SDL_KEYDOWN) {
 			switch (event.key.keysym.sym) {
-			case SDLK_UP:
-				if (!gameOver && !youWin) {
-					if (board.moveUp()) {
-						board.addRandomTile();
-						// sound
-					}
-				}
-				break;
-			case SDLK_DOWN:
-				if (!gameOver && !youWin) {
-					if (board.moveDown()) {
-						board.addRandomTile();
-						// sound
-					}
-				}
-				break;
-			case SDLK_LEFT:
-				if (!gameOver && !youWin) {
-					if (board.moveLeft()) {
-						board.addRandomTile();
-						// sound
-					}
-				}
-				break;
-			case SDLK_RIGHT:
-				if (!gameOver && !youWin) {
-					if (board.moveRight()) {
-						board.addRandomTile();
-						// sound
-					}
-				}
+			case SDLK_ESCAPE:
+				running = false;
 				break;
 			case SDLK_F5:
 				restart();
 				break;
-			case SDLK_ESCAPE:
-				running = false;
+			default:
+				if (!gameOver && !youWin) {
+					switch (event.key.keysym.sym) {
+					case SDLK_UP:
+						if (board.moveUp()) board.addRandomTile();
+						break;
+					case SDLK_DOWN:
+						if (board.moveDown()) board.addRandomTile();
+						break;
+					case SDLK_LEFT:
+						if (board.moveLeft()) board.addRandomTile();
+						break;
+					case SDLK_RIGHT:
+						if (board.moveRight()) board.addRandomTile();
+						break;
+					}
+				}
 				break;
 			}
 		}
 	}
 }
+
 
 void Game::update() {
 	if (!board.canMove()) {

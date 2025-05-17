@@ -92,6 +92,8 @@ void Renderer::renderLose() {
 	SDL_RenderCopy(renderer, texture, nullptr, &textRect);
 	SDL_FreeSurface(surface);
 	SDL_DestroyTexture(texture);
+	SDL_RenderPresent(renderer);
+
 }
 
 void Renderer::renderWin() {
@@ -115,6 +117,8 @@ void Renderer::renderWin() {
 
 	SDL_FreeSurface(surface);
 	SDL_DestroyTexture(texture);
+	SDL_RenderPresent(renderer);
+
 }
 
 void Renderer::renderScore(int score) {
