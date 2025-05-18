@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <SDL.h>
-#include <iostream>
+#include <vector>
 struct Tile {
 
 	int value;
@@ -16,7 +16,10 @@ struct Tile {
 	SDL_Color getColor() const;
 	SDL_Color getTextColor() const;
 
+	// animation
 	std::vector<Animation> animations;
+	SDL_Point currentPoint;
+
 	void addAnimation(const Animation& anim);
 	void updateAnimation(float time);
 	SDL_Point getRenderPosition() const;
