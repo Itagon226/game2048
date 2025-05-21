@@ -1,12 +1,24 @@
 ﻿#include "Game.h"
 #include "Constants.h"
 #include <SDL.h>
+#include <SDL_mixer.h>
 
-Game::Game() : running(false), gameOver(false), youWin(false), score(0) {}
+
+using namespace std;
+
+Game::Game() : running(false), gameOver(false), youWin(false), bgMusic(nullptr), winSound(nullptr), loseSound(nullptr), musicPlaying(false) {}
 
 Game::~Game() {
-	// Các hàm hủy âm thanh
+	
+	Mix_FreeMusic(bgMusic);
+	Mix_FreeChunk(winSound);
+	Mix_FreeChunk(loseSound);
+	bgMusic = nullptr;
+	winSound = nullptr;
+	loseSound = nullptr;
 
+	Mix_CloseAudio();
+	Mix_Quit();
 	// Hủy font chữ
 
 	SDL_Quit();
@@ -23,6 +35,15 @@ bool Game::initialize() {
 	// Khởi tạo ttf
 
 	// Khởi tạo mixer
+	if (Mix_Init(MIX_INIT_MP3) == 0) {
+		cerr << "SDL_mixer could not init required support for mp3. Error: " << Mix_GetError() << std::endl;
+		return false;
+	}
+
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+		cerr << "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << std::endl;
+		return false;
+	}
 
 	// Khởi tạo renderer
 	if (!renderer.initialize()) {
@@ -31,6 +52,13 @@ bool Game::initialize() {
 	}
 
 	// Load âm thanh
+	bgMusic = Mix_LoadMUS("assets/sound/nhacnen.mp3");
+	winSound = Mix_LoadWAV("assets/sound/win.wav");
+	loseSound = Mix_LoadWAV("assets/sound/lose.wav");
+
+	if (!bgMusic || !winSound || !loseSound) {
+		cerr << "Failed to load sound! Error: " << Mix_GetError() << std::endl;
+	}
 
 	// Khởi tạo game
 	restart();
@@ -46,6 +74,11 @@ void Game::run() {
 
 	while (running) {
 		frameStart = SDL_GetTicks();
+
+		if (!musicPlaying && !Mix_PlayingMusic()) {
+			Mix_PlayMusic(bgMusic, -1); 
+			musicPlaying = true;
+		}
 
 		handleEvents();
 		update();
@@ -100,11 +133,11 @@ void Game::handleEvents() {
 void Game::update() {
 	if (!board.canMove()) {
 		gameOver = true;
-		//sound
+		Mix_PlayChannel(-1, loseSound, 0);
 	}
 	else if (board.Win() && !youWin) {
 		youWin = true;
-		//sound
+		Mix_PlayChannel(-1, winSound, 0);
 	}
 }
 
@@ -115,26 +148,12 @@ void Game::render() {
 		renderer.renderLose();
 	else if (youWin)
 		renderer.renderWin();
-	renderer.renderScore(score);
 }
 
 void Game::restart() {
 	board.initialize();
 	gameOver = false;
 	youWin = false;
-	score = 0;
 	board.addRandomTile();
 	board.addRandomTile();
-}
-
-void MergeSound() {
-	//
-}
-
-void WinSound() {
-	//
-}
-
-void LoseSound() {
-	//
 }

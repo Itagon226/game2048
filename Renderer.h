@@ -3,6 +3,7 @@
 #include <SDL_ttf.h>
 #include "Board.h"
 
+
 struct Renderer {
 
 	SDL_Window* window;
@@ -16,7 +17,8 @@ struct Renderer {
 	void render(const Board& board);
 	void renderLose();
 	void renderWin();
-	void renderScore(int score);
+	
+
 
 	void renderTile(int x, int y, const Tile& tile);
 

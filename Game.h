@@ -13,9 +13,13 @@ struct Game {
 	bool running;
 	bool gameOver;
 	bool youWin;
-	int score;
 
+	
 	// biến âm thanh
+	bool musicPlaying = false;
+	Mix_Music* bgMusic = nullptr;
+	Mix_Chunk* winSound = nullptr;
+	Mix_Chunk* loseSound = nullptr;
 	
 	bool initialize();
 	void run();
@@ -24,9 +28,5 @@ struct Game {
 	void handleEvents();
 	void update();
 	void render();
-
-	/*void MergeSound();
-	void WinSound();
-	void LoseSound();*/
 
 };
