@@ -1,7 +1,9 @@
 #include "Tile.h"
 #include <map>
 
-Tile::Tile(int val) { value = val; }
+Tile::Tile(int val) { 
+    value = val; 
+}
 
 void Tile::setValue(int val) { value = val; }
 
@@ -9,6 +11,7 @@ int Tile::getValue() const { return value; }
 
 bool Tile::isEmpty() const { return value == 0; }
 
+// color
 SDL_Color Tile::getColor() const {
     static const std::map<int, SDL_Color> colorMap = {
         {0,    {204, 192, 179, 255}},

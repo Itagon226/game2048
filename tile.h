@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include <SDL.h>
 #include <vector>
+#include "Constants.h"
+
 struct Tile {
 
 	int value;
@@ -17,18 +19,5 @@ struct Tile {
 	SDL_Color getTextColor() const;
 
 	// animation
-	std::vector<Animation> animations;
-	SDL_Point currentPoint;
-
-	void addAnimation(const Animation& anim);
-	void updateAnimation(float time);
-	SDL_Point getRenderPosition() const;
 	
-};
-
-struct Animation {
-	SDL_Point from;
-	SDL_Point to;
-	float progress = 0.0f;
-	bool active = false;
 };
