@@ -2,7 +2,7 @@
 
 extern const char* WINDOW_TITLE;
 const int SCREEN_WIDTH = 580;
-const int SCREEN_HEIGHT = 580;
+const int SCREEN_HEIGHT = 640;
 const int GRID_SIZE = 4;     
 const int TILE_SIZE = 120;	 // kích thước mỗi ô
 const int TILE_MARGIN = 20;  // khoảng cách giữa các ô

@@ -2,11 +2,12 @@
 #include "Constants.h"
 #include <SDL.h>
 #include <SDL_mixer.h>
-
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
-Game::Game() : running(false), gameOver(false), youWin(false), bgMusic(nullptr), winSound(nullptr), loseSound(nullptr), musicPlaying(false) {}
+Game::Game() : running(false), gameOver(false), youWin(false), bgMusic(nullptr), winSound(nullptr), loseSound(nullptr), musicPlaying(false), score(0), highScore(0) {}
 
 Game::~Game() {
 	
@@ -63,7 +64,7 @@ bool Game::initialize() {
 	// Khởi tạo game
 	restart();
 	running = true;
-
+	loadHighScore();
 	return true;
 }
 
@@ -108,22 +109,45 @@ void Game::handleEvents() {
 				break;
 			default:
 				if (!gameOver && !youWin) {
+					int currentscore = 0;
 					switch (event.key.keysym.sym) {
 					case SDLK_UP:
-						if (board.moveUp()) board.addRandomTile();
+						if (board.moveUp(currentscore)) {
+							score += currentscore;
+							board.addRandomTile();
+						}
 						break;
 					case SDLK_DOWN:
-						if (board.moveDown()) board.addRandomTile();
+						if (board.moveDown(currentscore)) {
+							score += currentscore;
+							board.addRandomTile();
+						}
 						break;
 					case SDLK_LEFT:
-						if (board.moveLeft()) board.addRandomTile();
+						if (board.moveLeft(currentscore)) {
+							score += currentscore;
+							board.addRandomTile();
+						}
 						break;
 					case SDLK_RIGHT:
-						if (board.moveRight()) board.addRandomTile();
+						if (board.moveRight(currentscore)) {
+							score += currentscore;
+							board.addRandomTile();
+						}
 						break;
 					}
 				}
 				break;
+			}
+		}
+		else if (event.type == SDL_MOUSEBUTTONDOWN && gameOver) {
+			int x = event.button.x;
+			int y = event.button.y;
+			if (renderer.isPointInButton(x, y, renderer.PlayAgain)) {
+				restart();
+			}
+			else if (renderer.isPointInButton(x, y, renderer.Exit)) {
+				running = false;
 			}
 		}
 	}
@@ -139,10 +163,14 @@ void Game::update() {
 		youWin = true;
 		Mix_PlayChannel(-1, winSound, 0);
 	}
+	if (score > highScore) {
+		highScore = score;
+		saveHighScore();
+	}
 }
 
 void Game::render() {
-	renderer.render(board);
+	renderer.render(board, score, highScore);
 	
 	if (gameOver)
 		renderer.renderLose();
@@ -154,6 +182,23 @@ void Game::restart() {
 	board.initialize();
 	gameOver = false;
 	youWin = false;
+	score = 0;
 	board.addRandomTile();
 	board.addRandomTile();
+}
+
+void Game::loadHighScore() {
+	ifstream file("highscore.txt");
+	if (file.is_open()) {
+		file >> highScore;
+		file.close();
+	}
+}
+
+void Game::saveHighScore() {
+	ofstream file("highscore.txt");
+	if (file.is_open()) {
+		file << highScore;
+		file.close();
+	}
 }

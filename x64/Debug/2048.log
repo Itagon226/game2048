@@ -1,4 +1,5 @@
-﻿  Renderer.cpp
-  Tile.cpp
+﻿  2048.cpp
+  Game.cpp
+  Renderer.cpp
   Generating Code...
   2048.vcxproj -> C:\Users\admin\source\repos\2048GAME\2048\x64\Debug\2048.exe

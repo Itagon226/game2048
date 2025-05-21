@@ -13,8 +13,9 @@ struct Game {
 	bool running;
 	bool gameOver;
 	bool youWin;
+	int score;
+	int highScore;
 
-	
 	// biến âm thanh
 	bool musicPlaying = false;
 	Mix_Music* bgMusic = nullptr;
@@ -24,6 +25,8 @@ struct Game {
 	bool initialize();
 	void run();
 	void restart();
+	void loadHighScore();
+	void saveHighScore();
 
 	void handleEvents();
 	void update();

@@ -19,12 +19,15 @@ void Board::initialize() {
 }
 
 
-vector<Tile> Board::mergeTile(const vector<Tile>& tiles) {
+vector<Tile> Board::mergeTile(const vector<Tile>& tiles, int& currentScore) {
 	vector<Tile> merged;
+	currentScore = 0;
 	int i = 0;
 	while (i < tiles.size()) {
 		if (i + 1 < tiles.size() && tiles[i].getValue() == tiles[i + 1].getValue()) {
-			merged.push_back(Tile(tiles[i].getValue() * 2));
+			int newValue = tiles[i].getValue() * 2;
+			merged.push_back(Tile(newValue));
+			currentScore += newValue;
 			i += 2;
 		}
 		else {
@@ -38,9 +41,10 @@ vector<Tile> Board::mergeTile(const vector<Tile>& tiles) {
 	return merged;
 }
 
-bool Board::moveUp() {
+bool Board::moveUp(int& currentScore) {
 	bool moved = false;
-
+	currentScore = 0;
+	int localScore = 0;
 	for (int col = 0; col < GRID_SIZE; col++) {
 		vector<Tile> column;
 		for (int row = 0; row < GRID_SIZE; row++) {
@@ -49,7 +53,8 @@ bool Board::moveUp() {
 			}
 		}
 
-		vector<Tile> merged = mergeTile(column);
+		vector<Tile> merged = mergeTile(column, localScore);
+		currentScore += localScore;
 
 		for (int row = 0; row < GRID_SIZE; row++) {
 			if (grid[row][col].getValue() != merged[row].getValue()) {
@@ -62,8 +67,10 @@ bool Board::moveUp() {
 	return moved;
 }
 
-bool Board::moveDown() {
+bool Board::moveDown(int& currentScore) {
 	bool moved = false;
+	currentScore = 0;
+	int localScore = 0;
 
 	for (int col = 0; col < GRID_SIZE; col++) {
 		vector<Tile> column;
@@ -73,7 +80,8 @@ bool Board::moveDown() {
 			}
 		}
 
-		vector<Tile> merged = mergeTile(column);
+		vector<Tile> merged = mergeTile(column, localScore);
+		currentScore += localScore;
 
 		for (int row = 0; row < GRID_SIZE; row++) {
 			int index = GRID_SIZE - 1 - row;
@@ -87,8 +95,10 @@ bool Board::moveDown() {
 	return moved;
 }
 
-bool Board::moveLeft() {
+bool Board::moveLeft(int& currentScore) {
 	bool moved = false;
+	currentScore = 0;
+	int localScore = 0;
 
 	for (int row = 0; row < GRID_SIZE; row++) {
 		vector<Tile> line;
@@ -98,7 +108,8 @@ bool Board::moveLeft() {
 			}
 		}
 
-		vector<Tile> merged = mergeTile(line);
+		vector<Tile> merged = mergeTile(line, localScore);
+		currentScore += localScore;
 
 		for (int col = 0; col < GRID_SIZE; col++) {
 			if (grid[row][col].getValue() != merged[col].getValue()) {
@@ -111,8 +122,10 @@ bool Board::moveLeft() {
 	return moved;
 }
 
-bool Board::moveRight() {
+bool Board::moveRight(int& currentScore) {
 	bool moved = false;
+	currentScore = 0;
+	int localScore = 0;
 
 	for (int row = 0; row < GRID_SIZE; row++) {
 		vector<Tile> line;
@@ -122,7 +135,8 @@ bool Board::moveRight() {
 			}
 		}
 
-		vector<Tile> merged = mergeTile(line);
+		vector<Tile> merged = mergeTile(line, localScore);
+		currentScore += localScore;
 
 		for (int col = 0; col < GRID_SIZE; col++) {
 			int index = GRID_SIZE - 1 - col;
@@ -135,6 +149,7 @@ bool Board::moveRight() {
 
 	return moved;
 }
+
 
 
 void Board::addRandomTile() {

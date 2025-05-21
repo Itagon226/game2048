@@ -12,11 +12,11 @@ struct Board {
 	Board();
 	void initialize();
 
-	std::vector<Tile> mergeTile(const std::vector<Tile>& tiles);
-	bool moveUp();
-	bool moveDown();
-	bool moveLeft();
-	bool moveRight();
+	std::vector<Tile> mergeTile(const std::vector<Tile>& tiles, int& currentScore);
+	bool moveUp(int& currentScore);
+	bool moveDown(int& currentScore);
+	bool moveLeft(int& currentScore);
+	bool moveRight(int& currentScore);
 
 	void addRandomTile();
 	bool Win() const;
