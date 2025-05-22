@@ -5,7 +5,6 @@
 using namespace std;
 
 Renderer::Renderer() : window(nullptr), renderer(nullptr), font(nullptr) {
-    // Initialize button text
     PlayAgain.text = "Play Again";
     Exit.text = "Exit";
 }
@@ -26,7 +25,7 @@ bool Renderer::initialize() {
     font = TTF_OpenFont("assets/font/ClearSans-Medium.ttf", 36);
     if (font == nullptr) return false;
 
-    // Initialize button positions
+    // vị trí của nút
     PlayAgain.rect = { SCREEN_WIDTH / 4 - 75, SCREEN_HEIGHT / 2 + 50, 150, 50 };
     Exit.rect = { 3 * SCREEN_WIDTH / 4 - 75, SCREEN_HEIGHT / 2 + 50, 150, 50 };
 
@@ -37,12 +36,12 @@ bool Renderer::initialize() {
 void Renderer::render(const Board& board, int score, int highScore) {
     SDL_RenderClear(renderer);
 
-    // Draw board background
+    // draw bg
     SDL_SetRenderDrawColor(renderer, 187, 173, 160, 255);
     SDL_Rect boardRect = { BOARD_PADDING, BOARD_PADDING + 60, SCREEN_WIDTH - 2 * BOARD_PADDING, SCREEN_HEIGHT - 2 * BOARD_PADDING - 60 };
     SDL_RenderFillRect(renderer, &boardRect);
 
-    // Draw tiles
+    // draw tile
     for (int row = 0; row < GRID_SIZE; row++) {
         for (int col = 0; col < GRID_SIZE; col++) {
             renderTile(col * (TILE_SIZE + TILE_MARGIN) + BOARD_PADDING,
@@ -51,11 +50,9 @@ void Renderer::render(const Board& board, int score, int highScore) {
         }
     }
 
-    // Draw score and high score
+    // draw score
     SDL_Color textColor = { 119, 110, 101, 255 };
     SDL_Color boxColor = { 187, 173, 160, 255 };
-
-    // Score box
     SDL_SetRenderDrawColor(renderer, boxColor.r, boxColor.g, boxColor.b, boxColor.a);
     SDL_Rect scoreBox = { BOARD_PADDING, 10, 150, 40 };
     SDL_RenderFillRect(renderer, &scoreBox);
@@ -73,7 +70,7 @@ void Renderer::render(const Board& board, int score, int highScore) {
     SDL_FreeSurface(scoreSurface);
     SDL_DestroyTexture(scoreTexture);
 
-    // High score box
+    // high score
     SDL_SetRenderDrawColor(renderer, boxColor.r, boxColor.g, boxColor.b, boxColor.a);
     SDL_Rect highScoreBox = { SCREEN_WIDTH - BOARD_PADDING - 150, 10, 150, 40 };
     SDL_RenderFillRect(renderer, &highScoreBox);
