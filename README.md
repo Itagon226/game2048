@@ -6,7 +6,7 @@
 
 ## 🎮 Giới thiệu
 
-Đây là phiên bản đơn giản của game 2048 do mình tự xây dựng bằng ngôn ngữ C++ và thư viện đồ họa SDL2. Người chơi điều khiển các ô số bằng phím mũi tên, hợp nhất các ô giống nhau để đạt được ô 2048.
+Đây là phiên bản đơn giản của game 2048 do em tự xây dựng bằng ngôn ngữ C++ và thư viện đồ họa SDL2. Người chơi điều khiển các ô số bằng phím mũi tên, hợp nhất các ô giống nhau để đạt được ô 2048.
 
 ---
 
@@ -30,12 +30,12 @@ Dưới đây là các điểm nổi bật thể hiện nỗ lực tự học, t
 - Highlight khi có ô mới xuất hiện hoặc gộp thành công.
 
 ### 🔊 Âm thanh:
-*(nếu có)* Thêm hiệu ứng khi gộp ô hoặc khi kết thúc game.
+- Có nhạc nền lặp xuyên suốt game.
+- Âm thanh khi thắng/ thua.
 
-### 💡 Nỗ lực mở rộng và hoàn thiện:
-- Tự học SDL2 thông qua các tutorial và tài liệu trên mạng.
-- Không dùng code mẫu gốc của game 2048 mà tự viết lại hoàn toàn.
-- Thử nghiệm nhiều cách hiển thị đồ họa để tạo cảm giác mượt và rõ ràng khi chơi.
+### 💡 Quá trình làm game:
+- Tự học SDL2 thông qua các tutorial và video trên youtube.
+- Không dùng code mẫu gốc của game 2048 mà đọc qua và viết lại hoàn toàn.
 
 ---
 
@@ -51,13 +51,12 @@ Dưới đây là các điểm nổi bật thể hiện nỗ lực tự học, t
 
 - Hướng dẫn SDL2 cơ bản: https://lazyfoo.net/tutorials/SDL/  
 - Tutorial viết game 2048 bằng JavaScript (tham khảo logic): https://play2048.co/  
-- Nguồn ảnh hoặc font (nếu có)
+- Nguồn font: https://vi.piliapp.com/cool-text/
+- Nguồn âm thanh: https://pixabay.com/
 
 ## 🤖 Mức độ sử dụng AI
  
-- Dùng AI để gợi ý cách xử lý input và vòng lặp game.  
-- Gợi ý cấu trúc code cho phần hiển thị bằng SDL2.  
-- Hỏi AI khi gặp lỗi hoặc muốn tối ưu cách viết hàm di chuyển/gộp ô.  
-- Viết README với sự hỗ trợ của AI, nội dung đã được chỉnh sửa cho phù hợp.
-
+- Dùng AI để sửa lỗi.
+- Dùng AI để gợi ý các cú pháp trong SDL2.
+- Dùng để tối ưu một số hàm logic.
 ---
