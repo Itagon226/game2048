@@ -127,12 +127,12 @@ void Renderer::renderLose() {
     SDL_Color buttonColor = { 187, 173, 160, 255 };
     SDL_Color buttonTextColor = { 119, 110, 101, 255 };
 
-    // Draw background
+    // draw bg
     SDL_SetRenderDrawColor(renderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
     SDL_Rect background = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
     SDL_RenderFillRect(renderer, &background);
 
-    // Draw "GAME OVER!" text
+    // draw game over
     SDL_Surface* surface = TTF_RenderText_Solid(font, "GAME OVER!", textColor);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_Rect textRect = {
@@ -145,7 +145,7 @@ void Renderer::renderLose() {
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
 
-    // Draw Play Again button
+    // draw play again
     SDL_SetRenderDrawColor(renderer, buttonColor.r, buttonColor.g, buttonColor.b, buttonColor.a);
     SDL_RenderFillRect(renderer, &PlayAgain.rect);
     surface = TTF_RenderText_Solid(font, PlayAgain.text.c_str(), buttonTextColor);
@@ -160,7 +160,7 @@ void Renderer::renderLose() {
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
 
-    // Draw Exit button
+    // draw exit
     SDL_SetRenderDrawColor(renderer, buttonColor.r, buttonColor.g, buttonColor.b, buttonColor.a);
     SDL_RenderFillRect(renderer, &Exit.rect);
     surface = TTF_RenderText_Solid(font, Exit.text.c_str(), buttonTextColor);
