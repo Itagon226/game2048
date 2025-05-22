@@ -50,7 +50,7 @@ Dưới đây là các điểm nổi bật thể hiện nỗ lực tự học, t
 ## 📚 Nguồn tham khảo
 
 - Hướng dẫn SDL2 cơ bản: https://lazyfoo.net/tutorials/SDL/  
-- Tutorial viết game 2048 bằng JavaScript (tham khảo logic): https://play2048.co/  
+- Xem code mẫu từ github: https://github.com/pawel-glomski/2048
 - Nguồn font: https://vi.piliapp.com/cool-text/
 - Nguồn âm thanh: https://pixabay.com/
 
